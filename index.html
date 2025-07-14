@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elijah's Home Decor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+    <!--EmailJS SDK-->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+    emailjs.init('rw5fT_ypVvZryo790'); // Your public key
+</script>
+
+
+</head>
+<body>
+    <header>
+        <h1>Elijah's Home Decor</h1>
+        <p>Custom, stylish decor made with heart.</p>
+    </header>
+
+    <main>
+        <!--List of items-->
+        <section id="completedItems">
+            <h2>Completed Projects</h2>
+            <ul>
+                <li>Regular Bed frames</li>
+                <li>Bunk Bed frames</li>
+                <li>Window Blinds</li>
+                <li>TV Stand</li>
+                <li>Microwave Carts</li>
+                <li>Computer Desks</li>
+                <li>Shoe Rack</li>
+                <li>Nightstands</li>
+                <li>Closets</li>
+                <li>Shower Handle Bars</li>
+                <li>Floating shelves</li>
+                <li>Office/Gaming Chairs</li>
+            </ul>
+        </section>
+
+       
+        
+
+       
+        <!--Chatbot Section-->
+        <section id="chatbot">
+            <h2>Chat with My Chatbot</h2>
+            <img src="Adobe Express - file.png" alt="My Bot" width="160" style="display: block; margin: 0 auto 10px;"/>
+            <div id="chatbox">
+                <div id="chatlog"></div>
+                <input type="text" id="userInput" placeholder="Type your message here..." autocomplete="off" />
+                <button onclick="sendMessage()">Send</button>
+            </div>
+
+            <!--Calendar-->
+            <div id="calendar" style="display: none; margin-top:20px">
+                <h3>Available dates and time</h3>
+                <label for="datePicker">Select Date:</label>
+                <input type="date" id="datePicker" required>
+                <label for="timePicker">Select Time:</label>
+                <input type="time" id="timePicker" required>
+                <button id="submitDateTime">Confirm Appointment</button>
+            </div>
+
+            <!--Rating-->
+            <div id="ratingSection" style ="display: none; margin-top: 20px; text-align: center;">
+                <h3>Rate My Website</h3>
+                <label>How helpful was this site?</label></br>
+                <select id="websiteRatingSelect">
+                    <option value="5">⭐ ⭐ ⭐ ⭐ ⭐- Very Helpful</option>
+                    <option value="4">⭐ ⭐ ⭐ ⭐- Helpful</option>
+                    <option value="3">⭐ ⭐ ⭐- Average</option>
+                    <option value="2">⭐ ⭐- Not Great</option>
+                    <option value="1">⭐- Poor</option>
+                </select><br/>
+                <button onclick="submitWebsiteRating()">Submit Rating</button>
+            </div>
+        </section>
+
+        
+
+        <!--Feedback Display-->
+        <section id="feedback" style="display: none;">
+            <h2>User Likability</h2>
+            <p>Total Ratings: <span id="ratingCount">0</span></p>
+            <p>Average Rating: <span id="averageRating">0</span></p>
+        </section>
+
+        <!--Customer Feedback-->
+        <section id="customerFeedback">
+            <h2>Share your experience</h2>
+            <form id="feedbackForm">
+                <label for="feedbackRating">Rate Your Experience:</label>
+                <select id="feedbackRating" required>
+                    <option value="5">⭐ ⭐ ⭐ ⭐ ⭐- Excellent</option>
+                    <option value="4">⭐ ⭐ ⭐ ⭐- Good</option>
+                    <option value="3">⭐ ⭐ ⭐- Fair</option>
+                    <option value="2">⭐ ⭐- Poor</option>
+                    <option value="1">⭐- Terrible</option>
+                </select><br/><br/>
+
+                <textarea id="comment" rows="4" placeholder="Leave your review..." required></textarea><br/><br/>
+
+                <label>Upload a photo(optional):</label><br/>
+                <input type="file" id="imageInput" accept="image/*"><br/><br/>
+
+                <button type="submit">Submit Feedback</button>
+            </form>
+            <div id="feedbackMessages" style="margin-top: 15px;"></div>
+        </section>
+
+        <!--GALLERY SECTION-->
+        <section id="gallery">
+            <h2>My Work</h2>
+            <div class="gallery-grid">
+                <img src="IMG_2906.jpg" alt="Decor Item 1">
+                <img src="IMG_3197.jpg" alt="Decor Item 2">
+                <img src="IMG_3415.jpg" alt="Decor Item 3">
+                <img src="IMG_3512.jpg" alt="Decor Item 4">
+                <img src="IMG_3658.jpg" alt="Decor Item 5">
+                <img src="IMG_3713.jpg" alt="Decor Item 6">
+                <img src="IMG_6614.jpg" alt="Decor Item 7">
+                <img src="IMG_6615.jpg" alt="Decor Item 8">
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 My Service Chatbot</p>
+        </footer>
+
+
+        <!--Contact Form-->
+        <!-- Hidden form with updated IDs for submission -->
+    <form id="leadForm" method="POST" style="display:none;">
+        <input type="hidden" id="formService" name="service" />
+        <input type="hidden" id="formDate" name="date" />
+        <input type="hidden" id="formTime" name="time" />
+        <input type="hidden" id="formContact" name="contact" />
+    </form>
+
+    </main>
+
+    <footer>
+        <p>Contact me: <a href="mailto:elijahshomedecor@gmail.com">elijahshomedecor@gmail.com</a> | 📞 (347) 559-1422</p>
+    </footer>
+
+    <script src="chatbot.js"></script>
+
+    <script>
+        document.getElementById('submitDateTime').addEventListener('click', function () {
+          const selectedDate = document.getElementById('datePicker').value;
+          const selectedTime = document.getElementById('timePicker').value;
+          
+      
+      
+          const templateParams = {
+            user_name: userName,
+            user_contact: userContact,
+            service_details: serviceDetails,
+            date: selectedDate,
+            time: selectedTime
+          };
+      
+          emailjs.send('service_uq26nl3', 'template_g4dgvps', templateParams)
+            .then(function (response) {
+              console.log("SUCCESS!", response.status, response.text);
+              alert("Your booking was sent successfully!");
+            }, function (error) {
+              console.error("FAILED...", error);
+              alert("Something went wrong. Try again.");
+            });
+        });
+      </script>
+
+      
+</body>
+</html>
