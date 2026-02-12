@@ -1,4 +1,5 @@
 ELIJAH's HOME DECOR WEBSITE
+Website Link: https://elijahshomedecor.blob.core.windows.net/main/index.html
 
 Overview:
   This projects is a stylish and interactive website designed for my side business to showcase home decor services and completed
